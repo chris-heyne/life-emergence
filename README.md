@@ -1,6 +1,6 @@
 # HEYNE - Life Emergence
 
-An interactive artificial life simulator built in Python. This engine simulates emergence—complex, self-organizing structures arising from simple physics rules.
+An interactive artificial life simulator built in Python. This engine simulates emergence.
 
 ![Heyne Life — Emergence](heyne_emergence.png)
 
