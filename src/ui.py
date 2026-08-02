@@ -32,7 +32,7 @@ PRESETS = {
 
 
 class UISlider:
-    """Minimalist slider widget for setting numerical parameters."""
+    """Slider widget for setting parameters."""
 
     def __init__(self, x: int, y: int, w: int, h: int, min_val: float, max_val: float, initial_val: float, label: str, is_int: bool = False, color_accent: tuple = (58, 130, 246)):
         self.rect = pygame.Rect(x, y, w, h)
@@ -87,7 +87,6 @@ class UIManager:
     def __init__(self, physics_engine):
         self.physics = physics_engine
 
-        # Core Typography
         self.title_font = pygame.font.SysFont("Helvetica Neue, Arial", 16, bold=True)
         self.section_font = pygame.font.SysFont("Helvetica Neue, Arial", 11, bold=True)
         self.label_font = pygame.font.SysFont("Helvetica Neue, Arial", 12)
@@ -105,7 +104,7 @@ class UIManager:
         self.matrix_rects = {}
         self.setup_matrix_ui()
 
-        # Section 1: Species Population Sliders
+        # Species Population Sliders
         self.species_sliders = []
         pop_y = 290
         for idx in range(len(config.TYPES)):
@@ -118,7 +117,7 @@ class UIManager:
             )
             self.species_sliders.append(slider)
 
-        # Section 2: Physics Engine Sliders
+        # Physics Engine Sliders
         phys_y = 485
         self.physics_sliders = {
             "friction": UISlider(sx, phys_y, sw, 4, 0.05, 0.40, self.physics.friction, "Friction Damping"),
@@ -130,7 +129,7 @@ class UIManager:
         # Reset Physics Button
         self.btn_reset_physics = pygame.Rect(sx + 260, 442, 100, 22)
 
-        # Section 3: Interaction Presets
+        # Interaction Presets
         preset_y = 650
         self.preset_btns = {}
         preset_names = list(PRESETS.keys())
@@ -139,7 +138,7 @@ class UIManager:
             by = preset_y + (idx // 2) * 38
             self.preset_btns[name] = pygame.Rect(bx, by, 175, 32)
 
-        # Global Action Buttons (Bottom)
+        # Global Action Buttons
         self.btn_randomize = pygame.Rect(sx, config.WINDOW_HEIGHT - 55, 175, 36)
         self.btn_reset = pygame.Rect(sx + 185, config.WINDOW_HEIGHT - 55, 175, 36)
 
@@ -205,7 +204,6 @@ class UIManager:
                     self.physics.matrix[i, j] = round(new_val, 1)
 
     def draw(self, surface: pygame.Surface) -> None:
-        # Base Sidebar Background
         pygame.draw.rect(surface, (13, 17, 23), self.sidebar_rect)
         pygame.draw.line(surface, (48, 54, 61), (config.SIM_WIDTH, 0), (config.SIM_WIDTH, config.WINDOW_HEIGHT), 1)
 
@@ -240,7 +238,7 @@ class UIManager:
             txt = self.mono_font.render(f"{val:+.1f}", True, (240, 246, 252))
             surface.blit(txt, txt.get_rect(center=rect.center))
 
-        # --- Section 1: Population ---
+        # --- Population ---
         pygame.draw.line(surface, (33, 38, 45), (config.SIM_WIDTH + 30, 255), (config.SIM_WIDTH + 390, 255), 1)
         head_pop = self.section_font.render("POPULATION CONTROL", True, (139, 148, 158))
         surface.blit(head_pop, (config.SIM_WIDTH + 30, 262))
@@ -248,7 +246,7 @@ class UIManager:
         for slider in self.species_sliders:
             slider.draw(surface, self.label_font, self.mono_font)
 
-        # --- Section 2: Physics Engine ---
+        # --- Physics Engine ---
         pygame.draw.line(surface, (33, 38, 45), (config.SIM_WIDTH + 30, 440), (config.SIM_WIDTH + 390, 440), 1)
         head_phys = self.section_font.render("PHYSICS ENGINE", True, (139, 148, 158))
         surface.blit(head_phys, (config.SIM_WIDTH + 30, 448))
@@ -261,7 +259,7 @@ class UIManager:
         for slider in self.physics_sliders.values():
             slider.draw(surface, self.label_font, self.mono_font)
 
-        # --- Section 3: Presets ---
+        # --- Presets ---
         pygame.draw.line(surface, (33, 38, 45), (config.SIM_WIDTH + 30, 615), (config.SIM_WIDTH + 390, 615), 1)
         head_preset = self.section_font.render("INTERACTION PRESETS", True, (139, 148, 158))
         surface.blit(head_preset, (config.SIM_WIDTH + 30, 623))

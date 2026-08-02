@@ -1,11 +1,10 @@
-"""High-performance flat particle renderer for Heyne Life — Emergence."""
-
+# src/renderer.py
 import pygame
 from src import config
 
 
 class Renderer:
-    """Renders crisp, flat particle dots using batched surface blitting."""
+    """Renders particle dots using batched surface blitting."""
 
     def __init__(self, surface: pygame.Surface):
         self.surface = surface
@@ -20,10 +19,7 @@ class Renderer:
         for color in config.COLORS:
             surf = pygame.Surface((size, size), pygame.SRCALPHA)
 
-            # Faint 1px outer contrast ring for high-DPI clarity
             pygame.draw.circle(surf, (*color, 35), (center, center), 3)
-
-            # Solid, sharp 2px particle core
             pygame.draw.circle(surf, color, (center, center), 2)
 
             textures.append(surf)
@@ -39,7 +35,6 @@ class Renderer:
         types = physics_engine.types
         offset = 4  # Center 8x8 surface offset
 
-        # Batch blitting passes the entire sequence to Pygame's C-engine at once
         blit_list = [
             (
                 self.particle_textures[types[i]],

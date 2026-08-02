@@ -21,7 +21,7 @@ By adjusting the pairwise interaction weights between `-1.0` and `+1.0`, the sys
 ## Installation & Setup
 
 ### Prerequisites
-* Python 3.10 or higher
+* Python 3.10++
 
 ### 1. Clone the repository
 ```bash

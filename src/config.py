@@ -7,7 +7,7 @@ SIDEBAR_WIDTH = 420
 SIM_WIDTH = WINDOW_WIDTH - SIDEBAR_WIDTH
 SIM_HEIGHT = WINDOW_HEIGHT
 
-# Species
+# Particles
 TYPES = [0, 1, 2, 3]
 COLOR_NAMES = ["Red", "Blue", "Green", "White"]
 
@@ -19,7 +19,7 @@ COLORS = [
     (255, 255, 255)   # White
 ]
 
-# Initial Particles per Species
+# Initial Particle Count
 DEFAULT_SPECIES_COUNTS = [120, 120, 120, 120]
 
 # Physics Engine Defaults
