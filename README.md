@@ -1,63 +1,90 @@
-# HEYNE - Life Emergence
+# Life Emergence
 
-An interactive artificial life simulator built in Python. This engine simulates emergence.
+Life Emergence is an interactive artificial life simulator written in Python. It explores how simple local interaction rules can give rise to complex collective behavior.
 
-![Heyne Life — Emergence](heyne_emergence.png)
+![Life Emergence](life_emergence.png)
 
-## Concept
-Instead of hardcoding complex behaviors, **HEYNE - Life Emergence** relies on a simple 4x4 Interaction Matrix. Four particle species (**Red**, **Blue**, **Green**, **White**) interact through attraction and repulsion forces.
+## Overview
 
-By adjusting the pairwise interaction weights between `-1.0` and `+1.0`, the system spontaneously generates emergent biological patterns.
+The simulation consists of four particle species: **Red**, **Blue**, **Green**, and **White**.
+
+Interactions between species are defined by a 4×4 interaction matrix. Each matrix entry specifies the attraction or repulsion strength that one species experiences toward another.
+
+Interaction weights range from `-1.0` to `+1.0`:
+
+- Negative values represent repulsion.
+- Positive values represent attraction.
+- Values close to zero result in weak or negligible interaction.
+
+By modifying these interaction parameters, the system can produce a variety of emergent structures and collective behaviors.
 
 ## Features
-* **Vectorized Physics Engine:** High-performance pairwise force calculations powered by `NumPy`.
-* **Crisp Flat Vector Rendering:** Clean 2D rendering pipeline using Pygame's batch blitting (`blits`) for high FPS performance.
-* **Real-time Control Panel:**
-  * **Interactive Matrix:** Adjust interaction forces live (Left-click: `+0.1`, Right-click: `-0.1`).
-  * **Per-Species Population:** Dynamically tune individual particle species counts.
-  * **Live Physics Tuning:** Modify friction damping, interaction radii (`r_max`, `r_repel`), and simulation speed on the fly.
-* **Presets:** Instantly load stable emergent configurations (*Food Chain*, *Swarms*, *Gliding Worms*, *Symbiosis*).
 
-## Installation & Setup
+The simulation allows you to interact with the particle system in real time. You can change how the different species attract or repel each other, adjust their population sizes, and modify basic physics parameters such as friction and interaction distance.
 
-### Prerequisites
-* Python 3.10++
+Several preset configurations are included to demonstrate different emergent behaviors, and the interaction matrix can also be randomized to explore new patterns.
+
+The simulation is implemented in Python using NumPy for the particle calculations and Pygame for visualization.
+
+## Installation
+
+### Requirements
+
+- Python 3.10 or newer
 
 ### 1. Clone the repository
+
 ```bash
-git clone [https://github.com/chrisheyne-eth/heyne-life-emergence.git](https://github.com/chrisheyne-eth/heyne-life-emergence.git)
-cd heyne-life-emergence
+git clone https://github.com/chrisheyne-eth/life-emergence.git
+cd life-emergence
 ```
 
-### 2. Create and activate a virtual environment
-* **macOS / Linux:**
-  ```bash
-  python3 -m venv .venv
-  source .venv/bin/activate
-  ```
-* **Windows:**
-  ```cmd
-  python -m venv .venv
-  .venv\Scripts\activate
-  ```
+### 2. Create a virtual environment
+
+#### macOS / Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+#### Windows
+
+```cmd
+python -m venv .venv
+.venv\Scripts\activate
+```
 
 ### 3. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-## How to Play
+## Usage
 
-Run the simulation:
+Start the simulation with:
+
 ```bash
 python app.py
 ```
 
-* **Left-Click** a matrix cell to increase attraction strength (`+0.1`).
-* **Right-Click** a matrix cell to increase repulsion strength (`-0.1`).
-* Use the **Presets** to quickly switch between different synthetic ecosystems.
-* Click **Randomize Matrix** to discover new emergent behaviors.
-* Use **Reset Defaults** to restore base physics settings at any time.
+### Controls
+
+- **Left-click** a matrix cell to increase the interaction value by `+0.1`.
+- **Right-click** a matrix cell to decrease the interaction value by `-0.1`.
+- Use the **Presets** menu to load predefined interaction matrices.
+- Select **Randomize Matrix** to generate a new interaction configuration.
+- Select **Reset Defaults** to restore the default simulation parameters.
+
+## Model
+
+The behavior of the system is determined by pairwise interactions between particles.
+
+For four species, the interaction matrix contains 16 directed interaction parameters. Because the matrix is not required to be symmetric, species A can respond differently to species B than species B responds to species A.
+
+This simple rule set allows complex structures such as clusters, chains, swarms, and dynamically stable patterns to emerge from local interactions.
 
 ## License
-Distributed under the MIT License. See `LICENSE` for more information.
+
+Distributed under the MIT License. See `LICENSE` for details.
